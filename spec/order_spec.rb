@@ -21,13 +21,8 @@ describe Order do
 
   it 'should calculate total tax' do
     subject.take_order('Cafe Latte', 1)
-    subject.calculate_tax
+    subject.finalise_order
     expect(subject.tax).to eq(0.41)
-  end
-
-  it 'should calculate the net total' do 
-    subject.take_order('Cafe Latte', 1)
-    expect(subject.net_total).to eq(5.16)
   end
 
   it 'should increment the quantity of item if the item is added twice or more' do 
@@ -41,6 +36,7 @@ describe Order do
     subject.take_order('Cafe Latte', 2)
     subject.take_order('Tiramisu', 1)
     subject.finalise_order
+    expect(subject.net_total).to eq(22.71)
   end
 
 end
